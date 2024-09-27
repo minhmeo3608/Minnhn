@@ -1,0 +1,562 @@
+setfpscap(360)
+print("RobloXploits")
+local OrionLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/shlexware/Orion/main/source"))()
+OrionLib:MakeNotification({
+Name = "Notification",
+Content = "Hi Everyone, We Are From RobloXploits",
+Image = "rbxassetid://4483345998",
+Time = 10
+})
+print("RobloXploits")
+OrionLib:MakeNotification({
+Name = "Notification",
+Content = "Thank You For Using Our Script",
+Image = "rbxassetid://4483345998",
+Time = 10
+})
+print("RobloXploits")
+OrionLib:MakeNotification({
+Name = "Notification",
+Content = "Please Enjoy Our Script",
+Image = "rbxassetid://4483345998",
+Time = 10
+})
+print("RobloXploits")
+OrionLib:MakeNotification({
+Name = "Our Discord",
+Content = "https://discord.gg/7eT6S3s4Ed",
+Image = "rbxassetid://4483345998",
+Time = 10
+})
+print("RobloXploits")
+OrionLib:MakeNotification({
+Name = "Our Discord",
+Content = "https://discord.gg/C6VaVKsapN",
+Image = "rbxassetid://4483345998",
+Time = 10
+})
+print("RobloXploits")
+repeat wait() until game:IsLoaded()
+pcall(function()
+    repeat
+        wait()
+        for r, v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.LoadingGui.PlayBackground.Play.Activated)) do
+            v.Function()
+        end
+    until not game:GetService("Players").LocalPlayer.PlayerGui.LoadingGui.Enabled
+end)
+local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+if game.CoreGui:FindFirstChild("RobloXploits Hub") then
+    pcall(function()
+        game.CoreGui["RobloXploits Hub"]:Destroy()
+        game.CoreGui.ScreenGui:Destroy()
+    end)
+end
+spawn(function()
+    getgenv().UIToggled = true
+    HideGui = Instance.new('ScreenGui')
+    HideGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+    HideGui.Name = 'RobloXploits Hub'
+    HideGui.Enabled = true
+    HideGui.Parent = game:GetService('CoreGui')
+
+    local btnHideFrame = Instance.new('Frame', HideGui)
+    btnHideFrame.AnchorPoint = Vector2.new(0, 1)
+    btnHideFrame.Size = UDim2.new(0, 50, 0, 50)
+    btnHideFrame.Position = UDim2.new(0, 0.5, 0.2, 0)
+    btnHideFrame.Name = "Axionix"
+    btnHideFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    btnHideFrame.BackgroundTransparency = getgenv().UIToggled and 0 or .25
+
+    local btnHide = Instance.new('TextButton', btnHideFrame)
+    btnHide.BackgroundTransparency = 0
+    btnHide.Text = ""
+    btnHide.Size = UDim2.new(1, 0, 1, 0)
+
+    local imgHide = Instance.new('ImageLabel', btnHideFrame)
+    imgHide.AnchorPoint = Vector2.new(0, 0)
+    imgHide.Image = "rbxassetid://1917750552"
+    imgHide.BackgroundTransparency = 0
+    imgHide.Size = UDim2.new(0, getgenv().UIToggled and 40 or 30, 0, getgenv().UIToggled and 40 or 30)
+    imgHide.AnchorPoint = Vector2.new(.5, .5)
+    imgHide.Position = UDim2.new(.5, 0, .5, 0)
+
+    local UICornerBtnHide = Instance.new("UICorner")
+    UICornerBtnHide.Parent = btnHideFrame
+    UICornerBtnHide.CornerRadius = UDim.new(1, 0)
+
+    btnHide.MouseButton1Click:Connect(function()
+        getgenv().UIToggled = not getgenv().UIToggled
+        local sizeXY = getgenv().UIToggled and 40 or 30
+        game:GetService('TweenService'):Create(imgHide, TweenInfo.new(.25), { Size = UDim2.new(0, sizeXY, 0, sizeXY) })
+            :Play()
+        game:GetService('TweenService'):Create(btnHideFrame, TweenInfo.new(.25),
+            { BackgroundTransparency = getgenv().UIToggled and 0 or .25 }):Play()
+        game:service("VirtualInputManager"):SendKeyEvent(true, "P", false, game)
+        game:service("VirtualInputManager"):SendKeyEvent(false, "P", false, game)
+    end)
+end)
+local Window = Fluent:CreateWindow({
+    Title = "RobloXploits Hub-Meme Sea",
+    SubTitle = "Make By Axionix",
+    TabWidth = 125,
+    Size = UDim2.fromOffset(500, 350),
+    Acrylic = false,             -- The blur may be detectable, setting this to false disables blur entirely
+    Theme = "Dark",
+    MinimizeKey = Enum.KeyCode.P -- Used when theres no MinimizeKeybind
+})
+
+--Fluent provides Lucide Icons https://lucide.dev/icons/ for the tabs, icons are optional
+Main = Window:AddTab({ Title = "Main", Icon = "" })
+Stats = Window:AddTab({ Title = "Stats Upgrade", Icon = "" })
+NPC = Window:AddTab({ Title = "NPC", Icon = "" })
+Skill = Window:AddTab({ Title = "Skills", Icon = "" })
+MiscTab = Window:AddTab({ Title = "Misc", Icon = "" })
+ShopTab = Window:AddTab({ Title = "Shop", Icon = "" })
+getgenv().Options = Fluent.Options
+function notify(title, content, time)
+    Fluent:Notify({
+        Title = title,
+        Content = content,
+        Duration = 5
+    })
+end
+
+local Config = {
+    ["AutoFarm"] = false,
+    ["Amount"] = 1,
+    ["Stats"] = {
+        ["Melee"] = false,
+        ["Defense"] = false
+    },
+    ["Weapon"] = "",
+    ["AutoSkillKeyCode"] = {
+        ["Z"] = false
+    },
+    ["Distance"] = 7,
+    ["HoldZ"] = 0,
+    ["HoldX"] = 0,
+    ["HoldC"] = 0,
+    ["HoldV"] = 0,
+}
+
+function Save(i, v)
+    if i ~= nil then
+        Config[i] = v
+    end
+    if not isfolder("RobloXploits Hub") then
+        makefolder("RobloXploits Hub")
+    end
+    writefile("RobloXploits Hub" .. "/" .. "MemeSea-" .. game.Players.LocalPlayer.Name .. ".json",
+        game:GetService("HttpService"):JSONEncode(Config))
+end
+
+function read()
+    if not isfolder("RobloXploits Hub") then
+        makefolder("RobloXploits Hub")
+    end
+    if not pcall(function() readfile("RobloXploits Hub/MemeSea-" .. game.Players.LocalPlayer.Name .. ".json") end) then
+        writefile("RobloXploits Hub/MemeSea-" .. game.Players.LocalPlayer.Name .. ".json",
+            game:GetService("HttpService"):JSONEncode(Config))
+    end
+    for key, value in pairs(game:GetService("HttpService"):JSONDecode(readfile("RobloXploits Hub/MemeSea-" .. game.Players.LocalPlayer.Name .. ".json"))) do
+        Config[key] = value
+    end
+end
+
+read()
+function getnamequest()
+    local a = require(game:GetService("ReplicatedStorage").ModuleScript.Quest_Settings)
+    local level = game:GetService("Players").LocalPlayer.PlayerData.Level.Value
+
+    local closestQuest = nil
+    local closestDifference = math.huge
+
+    for i, v in pairs(a) do
+        if v.LevelNeed <= level and not v.Special_Quest and v.LevelNeed ~= 1100 and v.LevelNeed ~= 1550 and v.LevelNeed ~= 1400 and string.find(i, "Floppa Quest") then
+            local difference = level - v.LevelNeed
+            if difference <= closestDifference then
+                closestQuest = i
+                closestDifference = difference
+            end
+        end
+    end
+    return closestQuest
+end
+
+function getmob()
+    local a = require(game:GetService("ReplicatedStorage").ModuleScript.Quest_Settings)
+    local level = game:GetService("Players").LocalPlayer.PlayerData.Level.Value
+
+    local mob = nil
+    local closestDifference = math.huge
+
+    for i, v in pairs(a) do
+        if v.LevelNeed <= level and not v.Special_Quest and v.LevelNeed ~= 1100 and v.LevelNeed ~= 1550 and v.LevelNeed ~= 1400 and string.find(i, "Floppa Quest") then
+            local difference = level - v.LevelNeed
+            if difference <= closestDifference then
+                mob = v.Target
+                closestDifference = difference
+            end
+        end
+    end
+    return mob
+end
+
+--[[
+
+]]
+local plr = game.Players.LocalPlayer
+function DetectQuest()
+    if game.workspace.Location.QuestLocaion:FindFirstChild(getnamequest()) then
+        for i, v in pairs(game.workspace.Location.QuestLocaion:GetChildren()) do
+            if v.Name == getnamequest() then
+                return v.CFrame, v
+            end
+        end
+    else
+        for i, v in pairs(workspace.NPCs.Quests_Npc:GetChildren()) do
+            if v.Name == getnamequest() then
+                return v.WorldPivot, v
+            end
+        end
+    end
+end
+
+function getquest()
+    local QuestPos, Quest = DetectQuest()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = QuestPos
+    local PromptQuest = workspace.NPCs.Quests_Npc:FindFirstChild(Quest.Name)
+    if PromptQuest then
+        if plr:DistanceFromCharacter(PromptQuest.Block.Position) < 8 then
+            if game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("ProximityPrompts") and game:GetService("Players").LocalPlayer.PlayerGui.ProximityPrompts:FindFirstChild("Prompt") and game:GetService("Players").LocalPlayer.PlayerGui.QuestGui.Holder.QuestSlot1.Visible == false then
+                fireproximityprompt(PromptQuest.Block.QuestPrompt)
+            end
+            wait(0.5)
+        end
+    end
+end
+
+function noclip()
+    if plr.Character:FindFirstChild("HumanoidRootPart") and not plr.Character.HumanoidRootPart:FindFirstChild("EffectsSY") then
+        local BV = Instance.new("BodyVelocity")
+        BV.Parent = plr.Character.HumanoidRootPart
+        BV.Name = "EffectsSY"
+        BV.MaxForce = Vector3.new(100000, 100000, 100000)
+        BV.Velocity = Vector3.new(0, 0, 0)
+    end
+end
+
+function destroynoclip()
+    if plr.Character:FindFirstChild("HumanoidRootPart") and plr.Character.HumanoidRootPart:FindFirstChild("EffectsSY") then
+        plr.Character.HumanoidRootPart.EffectsSY:Destroy()
+    end
+end
+
+spawn(function()
+    game:GetService("RunService").Stepped:Connect(function()
+        if Options["Auto Farm"].Value or Options["Auto Raid"].Value then
+            noclip()
+        end
+        if not Options["Auto Farm"].Value and not Options["Auto Raid"].Value then
+            destroynoclip()
+        end
+    end)
+end)
+function function0(a)
+    if a:FindFirstChild("Humanoid") and a:FindFirstChild("HumanoidRootPart") then
+        return true
+    else
+        return false
+    end
+end
+
+function function01(tb)
+    tb2 = 0
+    for i, v in pairs(tb) do
+        if v > tb2 then tb2 = v end
+    end
+    return tb2
+end
+
+function function1()
+    local s = {}
+    local s3 = false
+    for _, t1 in pairs(workspace.Monster:GetChildren()) do
+        if function0(t1) then
+            for _, t2 in pairs(workspace.Monster:GetChildren()) do
+                if function0(t2) and function0(t1) then
+                    if (t2.HumanoidRootPart.Position - t1.HumanoidRootPart.Position).Magnitude <= 1000 then
+                        if not s[t1.HumanoidRootPart.CFrame] then
+                            s[t1.HumanoidRootPart.CFrame] = 1
+                        else
+                            s[t1.HumanoidRootPart.CFrame] = s[t1.HumanoidRootPart.CFrame] + 1
+                        end
+                    end
+                end
+            end
+        end
+    end
+    local s2 = function01(s)
+    for i, v in pairs(s) do
+        if v == s2 then
+            s3 = i
+        end
+    end
+    return s3;
+end
+
+function sizepart(v)
+    if not v.PrimaryPart:FindFirstChild("vando") and plr:DistanceFromCharacter(v.PrimaryPart.Position) <= 1000 then
+        local lock = Instance.new("BodyVelocity")
+        lock.Parent = v.PrimaryPart
+        lock.Name = "vando"
+        lock.MaxForce = Vector3.new(0, 10000, 0)
+        lock.Velocity = Vector3.new(0, 0, 0)
+    end
+end
+
+local TargetBring
+local PositionBring
+function ValueMob(a)
+    local b = 0
+    for i, v in pairs(workspace.Monster:GetChildren()) do
+        if v.Name == a.Name then
+            b = b + 1
+        end
+    end
+    return b
+end
+
+function BringMob(a)
+    pcall(function()
+        if TargetBring ~= a then
+            TargetBring = a
+            PositionBring = a.PrimaryPart.CFrame
+        end
+        if ValueMob(a) > 1 then
+            for i, v in pairs(workspace.Monster:GetChildren()) do
+                if v.Name == a.Name and a:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+                    v.PrimaryPart.CFrame = PositionBring
+                    if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.PrimaryPart.CFrame.Position).Magnitude <= 1000 then
+                        sizepart(v)
+                    end
+                    sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+                end
+            end
+        end
+    end)
+end
+
+local function equiptool(toolname)
+    pcall(function()
+        if game:GetService('Players').LocalPlayer:WaitForChild('Backpack'):FindFirstChild(toolname) and game:GetService('Players').LocalPlayer.Character:FindFirstChild("Humanoid") and game:GetService('Players').LocalPlayer.Character.Humanoid.Health > 0 then
+            game:GetService('Players').LocalPlayer.Character:WaitForChild('Humanoid'):EquipTool(game:GetService(
+                'Players').LocalPlayer:WaitForChild('Backpack'):FindFirstChild(toolname))
+        end
+    end)
+end
+function DetectMob()
+    for i, v in pairs(workspace.Monster:GetChildren()) do
+        if v.Name == getmob() and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
+            return v
+        end
+    end
+end
+
+function useskill(weapon, skill)
+    if getgenv().posaim then
+        local args = {
+            [1] = workspace:WaitForChild("Character"):WaitForChild(plr.Name),
+            [2] = weapon,
+            [3] = skill,
+            [4] = "Hold",
+            [5] = {
+                ["Mouse_Position"] = getgenv().posaim,
+                ["Hit_Position"] = getgenv().posaim
+            }
+        }
+        game:GetService("ReplicatedStorage"):WaitForChild("OtherEvent"):WaitForChild("SkillEvents"):WaitForChild(
+            "Server_Skills"):FireServer(unpack(args))
+        local args = {
+            [1] = workspace:WaitForChild("Character"):WaitForChild(plr.Name),
+            [2] = weapon,
+            [3] = skill,
+            [4] = "Release",
+            [5] = {
+                ["Mouse_Position"] = getgenv().posaim,
+                ["Hit_Position"] = getgenv().posaim
+            }
+        }
+
+        game:GetService("ReplicatedStorage"):WaitForChild("OtherEvent"):WaitForChild("SkillEvents"):WaitForChild(
+            "Server_Skills"):FireServer(unpack(args))
+    end
+end
+
+local VirtualUser = game:GetService("VirtualUser")
+function spamskillautofarm()
+    if Config["AutoSkill"] then
+        spawn(function()
+            if Config["AutoSkillKeyCode"]["Z"] then
+                spawn(function()
+                    useskill(Config.Weapon, "Z")
+                end)
+            end
+        end)
+        spawn(function()
+            if Config["AutoSkillKeyCode"]["X"] then
+                spawn(function()
+                    useskill(Config.Weapon, "X")
+                end)
+            end
+        end)
+        spawn(function()
+            if Config["AutoSkillKeyCode"]["C"] then
+                spawn(function()
+                    useskill(Config.Weapon, "C")
+                end)
+            end
+        end)
+        spawn(function()
+            if Config["AutoSkillKeyCode"]["V"] then
+                spawn(function()
+                    useskill(Config.Weapon, "V")
+                end)
+            end
+        end)
+    end
+end
+
+function honglampromax()
+    if not Config["AutoSkill"] then
+        VirtualUser:CaptureController()
+        VirtualUser:Button1Down(Vector2.new(1e4, 1e4))
+    else
+        spamskillautofarm()
+    end
+end
+
+local click = false
+spawn(function()
+    while wait() do
+        if click then
+            VirtualUser:CaptureController()
+            VirtualUser:Button1Down(Vector2.new(1e4, 1e4))
+        end
+    end
+end)
+function Tp(v)
+    if v:FindFirstChild("Humanoid") then
+        if v.Humanoid.Health > 0 then
+            plr.Character:SetPrimaryPartCFrame(v.PrimaryPart.CFrame *
+                CFrame.new(0, Config.Distance, 0) *
+                CFrame.Angles(math.rad(-90), 0, 0))
+        end
+    end
+end
+
+spawn(function()
+    pcall(function()
+        while wait() do
+            local a, b = pcall(function()
+                if Config["AutoFarm"] then
+                    if plr.PlayerGui.QuestGui.Holder.QuestSlot1.Visible == false then
+                        getquest()
+                    else
+                        if game:GetService("Players").LocalPlayer.PlayerGui.QuestGui.Holder.QuestSlot1.QuestGiver.Text ~= getnamequest() then
+                            for r, v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.QuestGui.Holder.QuestSlot1.CloseFrame.Close.Activated)) do
+                                v.Function()
+                            end
+                        end
+                        local v = DetectMob()
+                        if v then
+                            click = true
+                            repeat
+                                task.wait()
+                                spawn(function()
+                                    equiptool(Config["Weapon"])
+                                end)
+                                BringMob(v)
+                                Tp(v)
+                                spawn(function()
+                                    honglampromax()
+                                end)
+                                getgenv().posaim = v.PrimaryPart.CFrame.Position
+                            until not v or not v.Parent or not v.PrimaryPart or not v.Humanoid or v.Humanoid.Health <= 0 or game:GetService("Players").LocalPlayer.PlayerGui.QuestGui.Holder.QuestSlot1.Visible == false or not Options["Auto Farm"].Value or not Config["AutoFarm"]
+                            click = false
+                        end
+                    end
+                end
+            end)
+        end
+    end)
+end)
+
+spawn(function()
+    while wait() do
+        if Config["Auto Upgrade Stats"] then
+            spawn(function()
+                if Config["Stats"]["Defense"] then
+                    local args = {
+                        [1] = {
+                            ["Target"] = "DefenseLevel",
+                            ["Action"] = "UpgradeStats",
+                            ["Amount"] = Config.Amount
+                        }
+                    }
+
+                    game:GetService("ReplicatedStorage"):WaitForChild("OtherEvent"):WaitForChild("MainEvents")
+                        :WaitForChild(
+                            "StatsFunction"):InvokeServer(unpack(args))
+                end
+            end)
+            spawn(function()
+                if Config["Stats"]["Sword"] then
+                    local args = {
+                        [1] = {
+                            ["Target"] = "SwordLevel",
+                            ["Action"] = "UpgradeStats",
+                            ["Amount"] = Config.Amount
+                        }
+                    }
+
+                    game:GetService("ReplicatedStorage"):WaitForChild("OtherEvent"):WaitForChild("MainEvents")
+                        :WaitForChild(
+                            "StatsFunction"):InvokeServer(unpack(args))
+                end
+            end)
+            spawn(function()
+                if Config["Stats"]["Melee"] then
+                    local args = {
+                        [1] = {
+                            ["Target"] = "MeleeLevel",
+                            ["Action"] = "UpgradeStats",
+                            ["Amount"] = Config.Amount
+                        }
+                    }
+
+                    game:GetService("ReplicatedStorage"):WaitForChild("OtherEvent"):WaitForChild("MainEvents")
+                        :WaitForChild(
+                            "StatsFunction"):InvokeServer(unpack(args))
+                end
+            end)
+            spawn(function()
+                if Config["Stats"]["Power"] then
+                    local args = {
+                        [1] = {
+                            ["Target"] = "MemePowerLevel",
+                            ["Action"] = "UpgradeStats",
+                            ["Amount"] = Config.Amount
+                        }
+                    }
+
+                    game:GetService("ReplicatedStorage"):WaitForChild("OtherEvent"):WaitForChild("MainEvents")
+                        :WaitForChild(
+                            "StatsFunction"):InvokeServer(unpack(args))
+                end
+            end)
+        end
+    end
+end)
+function weap
